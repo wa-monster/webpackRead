@@ -66,13 +66,15 @@
     let HtmlWebpackPlugin = require('html-webpack-plugin)
     module.exports = {
         plugins:[//放所有的webpack插件
-            template:'./src/index.html',//模板
-            filename:'index.html',
-            minify:{
-                removeAttributeQuotes:true,//删除部分双引号
-                collapseWhitespace:true,//压缩html代码
-            },
-            hash:true,//给js文件加上哈希戳
+			new HtmlWebpackPlugin({
+				template:'./src/index.html',//模板
+				filename:'index.html',
+				minify:{
+					removeAttributeQuotes:true,//删除部分双引号
+					collapseWhitespace:true,//压缩html代码
+				},
+				hash:true,//给js文件加上哈希戳
+			})
         ]
     }
 
@@ -82,4 +84,46 @@
             filename:'aa.[hash].js'
         }
     如果希望哈希值短一点，可以 [hash:8] => 只显示前8位
-    在development中
+    
+##css样式处理
+    安装
+    npm i css-loader style-loader -D
+    //css-loader 解析@import规则 =》达成多个css一起调用
+    //style-loader把css插入到head标签中
+    //loader的特点，希望功能单一
+
+    webpack.config.js中的配置
+    module.exports={
+        module：{
+            rules:[
+                //用法：
+                //字符串只用一个loader
+                //多个loader需要[]
+                //loader的顺序，默认从右到左，从下到上
+                //loader还可以写成对象形式 => 好处可以传参
+                //例如 
+                //{
+                //  loader:'style-loader',
+                //  options:{
+                //      insertAt:'top'//实现把插入到head标签时放在所有css的最上面
+                //  }       
+                //}
+                {test:/\.css$/,use:[
+                    'css-loader'，
+                    ‘style-loader
+                ]}
+            ]
+        }
+    }
+
+    使用预处理语言less
+    npm i less less-loader
+    rules:[
+        {test:/\.less$/,use:[
+                'style-loader',
+                'css-loader',
+                'less-loader',//把less => css
+            ]
+        }
+    ]
+
