@@ -127,3 +127,74 @@
         }
     ]
 
+    抽离css样式
+    安装 插件
+    npm i mini-css-extract-plugin -D
+
+    因为是插件，所以引入
+    let MiniCssExtractPlugin = require('mini-css-extract-plugin')
+    插件放在plugins里面
+    plugins:[
+        new MiniCssExtractPlugin({
+            filename:'css/main.css'
+        })
+    ]
+    
+    如此我们可以把css全部提出来，作为一个单独的css文件存在
+
+    实现css添加前缀（实现一些css的兼容）
+
+    安装 postcss-loader 和 autoprefixer
+     npm i postcss-loader autoprefixer 
+
+    给css加上这个loader
+    module:{
+        rules:[
+            {
+                test:/\.css$/,use:[
+                    'css-loader',
+                    'postcss-loader',//需要放在css-loader之前先解析
+                ]
+            },
+            {//如果有用到sass,less等，也需要在里面添加postcss-loader
+                test:/\.less$/,use:[
+                    'css-loader',
+                    'postcss-loader',//需要放在css-loader之前先解析
+                    'less-loader',
+                ]
+            }
+        ]
+    }
+    然后还需要添加新的配置文件 => postcss.config.js
+    放在和webpack.config.js同目录下
+    写入
+    module.exports={
+	    plugins:[require('autoprefixer')]
+    }
+
+    如此可以加入前缀 
+
+    压缩css
+    在使用MiniCssExtractPlugin 的时候，生产环节不会压缩css. MiniCssExtractPlugin提供了压缩css的办法
+
+    安装
+    optimize-css-assets-webpack-plugin （ css压缩）
+    uglifyjs-webpack-plugin （再用css压缩那个插件的时候，js无法在自主压缩了，所以需要新的js压缩）
+
+    npm i optimize-css-assets-webpack-plugin uglifyjs-webpack-plugin -D
+
+    引入插件
+    let OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+
+    let UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+
+    plugins里面引入
+
+        new OptimizeCSSAssetsPlugin({}),//css压缩
+	    new UglifyJsPlugin({//js压缩
+		        cache: true,
+		        parallel: true,
+		        sourceMap: true 
+		    }),
+    实现css和js压缩        
+
