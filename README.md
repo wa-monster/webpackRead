@@ -86,6 +86,7 @@
     如果希望哈希值短一点，可以 [hash:8] => 只显示前8位
     
 ##css样式处理
+
     安装
     npm i css-loader style-loader -D
     //css-loader 解析@import规则 =》达成多个css一起调用
@@ -197,4 +198,54 @@
 		        sourceMap: true 
 		    }),
     实现css和js压缩        
+
+##es6
+    安装 babel-loader @babel/core @babel/preset-env
+
+    npm i babel-loader @babel/core @babel/preset-env -D
+
+    webpack.config.js 的module下添加
+
+        {
+            test:/\.js$/,
+            use:{
+                loader:'babel-loader',
+                options:{ //用babel-loader 把es6转换为es5
+                    presets:[
+                    '@babel/preset-env'
+                    ],
+                    
+                }
+            }
+        }
+
+
+    上面只能转换es6如果要转化es7 的class 类 
+
+    需要下载 @babel/plugin-proposal-class-properties
+    npm i @babel/plugin-proposal-class-properties -D
+
+    在 use对象里面的options做额外配置
+
+        options:{ //用babel-loader 把es6转换为es5
+            presets:[
+            '@babel/preset-env'
+            ],
+            plugins:[
+                ["@babel/plugin-proposal-class-properties", { "loose" : true }],
+            ]   
+        }
+
+    同理，如果要用装饰器
+    则
+    npm i @babel/plugin-proposal-decorators -D
+    代码添加
+    plugins:[
+        ["@babel/plugin-proposal-decorators", { "legacy": true }],
+        ["@babel/plugin-proposal-class-properties", { "loose" : true }],
+    ]   
+
+ 
+
+
 
