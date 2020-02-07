@@ -61,7 +61,7 @@
 ## html打包
     到目前为止，都是打包js，如果把dist。目录下的index.js删除，那么热更新服务找不到html，所以我们需要能够把src的html也打包
     安装
-    npm i html-webpack-plugin
+    ```npm i html-webpack-plugin -D```
 
     let HtmlWebpackPlugin = require('html-webpack-plugin)
     module.exports = {
@@ -204,7 +204,7 @@
 
     npm i babel-loader @babel/core @babel/preset-env -D
 
-    webpack.config.js 的module下添加
+    webpack.config.js 的module. rules下添加
 
         {
             test:/\.js$/,
