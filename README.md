@@ -16,7 +16,7 @@
     ```
     let path = require('path')//解析路径，获取绝对路径
     module.exports={//cmd语法
-        mode:'developer'//webpack有两种模式，production,development
+        mode:'development'//webpack有两种模式，production,development
         entry:'./src/index.js',
         output:{
             filename:"aa.js",
@@ -85,7 +85,7 @@
         }
     如果希望哈希值短一点，可以 [hash:8] => 只显示前8位
     
-## css样式处理
+##css样式处理
 
     安装
     npm i css-loader style-loader -D
@@ -199,7 +199,7 @@
 		    }),
     实现css和js压缩        
 
-## 高级js语法转化
+##es6
     安装 babel-loader @babel/core @babel/preset-env
 
     npm i babel-loader @babel/core @babel/preset-env -D
