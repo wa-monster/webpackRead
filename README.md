@@ -85,7 +85,7 @@
         }
     如果希望哈希值短一点，可以 [hash:8] => 只显示前8位
     
-##css样式处理
+## css样式处理
 
     安装
     npm i css-loader style-loader -D
@@ -199,7 +199,7 @@
 		    }),
     实现css和js压缩        
 
-##es6
+## es6
     安装 babel-loader @babel/core @babel/preset-env
 
     npm i babel-loader @babel/core @babel/preset-env -D
